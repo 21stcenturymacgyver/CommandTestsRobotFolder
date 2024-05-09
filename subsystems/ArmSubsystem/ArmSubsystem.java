@@ -1,5 +1,6 @@
 package frc.robot.subsystems.ArmSubsystem;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
 
 //import edu.wpi.first.wpilibj2.command.Command;
@@ -80,6 +81,14 @@ public class ArmSubsystem extends SubsystemBase {
     double[] l_currentPos = {azimuthAngle,l_radius,l_height};
     return l_currentPos;
   }
+  public DoubleSupplier[] testThisDoubleSupplierXYZ(){
+    double[] l_currentPos =getArmPositionXYZ();
+    DoubleSupplier[] suppliers = new DoubleSupplier[]{
+      () -> l_currentPos[0], // Example supplier 1
+      () -> l_currentPos[1], // Example supplier 2
+      () -> l_currentPos[2] // Example supplier 3
+    };
+  return suppliers;}
   public double[] getArmPositionXYZ() {
     // Calculations done in Radians for 2 segment arm of equal segment lengths
     //Length from shoulder to claw

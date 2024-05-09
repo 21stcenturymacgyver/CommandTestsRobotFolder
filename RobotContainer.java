@@ -94,7 +94,7 @@ public class RobotContainer {
     // new JoystickButton(m_PersonalizedController, m_PersonalizedController.openClawButton())
     //   .onTrue(m_ArmSubsystem.setClawPositionCommand(Constants.ArmMoveConstants.CLAW_OPEN_POSITION));
     new JoystickButton(m_PersonalizedController, m_PersonalizedController.closeClawCubeButton())
-      .onTrue(MultiLine.MultiLineHHTest(m_ArmSubsystem));
+      .onTrue(MultiLine.MultiLineHHTest(m_ArmSubsystem,m_ArmSubsystem.testThisDoubleSupplierXYZ()));
 
     // new JoystickButton(m_PersonalizedController, m_PersonalizedController.closeClawCubeButton())
     //   .onTrue(m_ArmSubsystem.setClawPositionCommand(Constants.ArmMoveConstants.CLAW_CUBE_POSITION));

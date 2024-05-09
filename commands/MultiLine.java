@@ -9,6 +9,9 @@ import frc.robot.Constants.ArmMoveConstants;
 import frc.robot.subsystems.ArmSubsystem.ArmFollowLineCommand;
 import frc.robot.subsystems.ArmSubsystem.ArmFollowLineXYZCommand;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
@@ -38,8 +41,8 @@ public final class MultiLine {
     new ArmFollowLineCommand(m_ArmSubsystem, 30, 60, 35));
   }
 
-  public static Command MultiLineHHTest(ArmSubsystem m_ArmSubsystem) {
-    double[] l_currentPos = {0,20,15};
+  public static Command MultiLineHHTest(ArmSubsystem m_ArmSubsystem, DoubleSupplier[] l_double) {
+    double[] l_currentPos = {l_double[0].getAsDouble() ,l_double[1].getAsDouble(),l_double[2].getAsDouble()};
     return Commands.sequence(
       new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+2,l_currentPos[2]+0, 1), 
       new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+2,l_currentPos[2]+8, 5), 
