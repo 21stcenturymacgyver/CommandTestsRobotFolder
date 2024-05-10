@@ -6,9 +6,8 @@ package frc.robot.commands;
 
 
 import frc.robot.Constants.ArmMoveConstants;
-import frc.robot.subsystems.ArmSubsystem.ArmFollowLineCommand;
-import frc.robot.subsystems.ArmSubsystem.ArmFollowLineXYZCommand;
-import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
+import frc.robot.subsystems.ArmSubsystem.*;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
@@ -39,20 +38,45 @@ public final class MultiLine {
   }
 
   public static Command MultiLineHHTest(ArmSubsystem m_ArmSubsystem) {
-    double[] l_currentPos = {0,20,15};
     return Commands.sequence(
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+2,l_currentPos[2]+0, 1), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+2,l_currentPos[2]+8, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+0,l_currentPos[2]+8, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+0,l_currentPos[2]+0, 5),
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+2,l_currentPos[2]+0, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+2,l_currentPos[2]+8, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+0,l_currentPos[2]+8, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+0,l_currentPos[2]+4, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+4, l_currentPos[1]+2,l_currentPos[2]+4, 5), 
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+2,l_currentPos[2]+4, 5),  
-      new ArmFollowLineXYZCommand(m_ArmSubsystem, l_currentPos[0]+0, l_currentPos[1]+0,l_currentPos[2]+4, 5));
+       
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 0,8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 3, 0,-8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 3, 0,8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 0,-8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 2, 0,0, 5),
+
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 2, 0,8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 2, 0,-8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, -1, 0,4, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, -2, 0,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 5, 0,-4, 5),
+
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 4, 0,8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, -4, 0,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 2,0, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 4, 0,-8, 5),
+      new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -8,0, 5)); 
+      
   }
+  // public static Command MultiLineHHTest(ArmSubsystem m_ArmSubsystem) {
+  //   return Commands.sequence(
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 2,0, 1), 
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 0,8, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -2,0, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 4, 0,0, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 2,0, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 0,-8, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, 0,4, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, -4, 0,0, 5),
+  //     new ArmFollowLineRelativeXYZCommand(m_ArmSubsystem, 0, -2,0, 5)); 
+      
+  // }
   // private MultiLine() {
   //   throw new UnsupportedOperationException("This is a utility class!");
   // }

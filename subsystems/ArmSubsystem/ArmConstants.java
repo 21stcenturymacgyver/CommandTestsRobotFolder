@@ -13,7 +13,7 @@ public final class ArmConstants {
     public static final double AZIMUTH_HOMING_SPEED = DEFAULT_HOMING_SPEED;
     public static final int AZIMUTH_MAX = 200;
     public static final int AZIMUTH_MIN = -200;
-    public static final int AZIMUTH_START_OFFSET = -9;//for claw open positon
+    public static final int AZIMUTH_START_OFFSET = 0;//-9 for claw open positon
     public static final int AZIMUTH_MOTOR_ID = 2;
     public static final int AZIMUTH_HOMED_OFFSET = 0;
     
