@@ -14,6 +14,8 @@ import frc.robot.commands.PrintCommand;
 
 public class ArmSubsystem extends SubsystemBase {
 
+  public ArmSubsystem() {}
+
   // Define all of the Joints
   // public Joint(int deviceID,Boolean limitSwitchDirection, 
   // double l_max_output, double l_min_output, 
@@ -52,18 +54,35 @@ public class ArmSubsystem extends SubsystemBase {
   private static double ShoulderAngle = 100;
   private static double elbowAngle =25;
   private static double clawPosition =0;
+
+  public static void homeShoulder() {
+    ShoulderJoint.homeJoint();
+  }
+
+  public static void homeElbow() {
+    ElbowJoint.homeJoint();
+  }
+
+  public static boolean shoulderIsHomed() {
+    return ShoulderJoint.homedCondition();
+  }
+
+  public static boolean elbowIsHomed() {
+    return ElbowJoint.homedCondition();
+  }
+
   
-  public void initialize() {
+  public static void initialize() {
     //force claw and azimuth into homed condition since they have no limit switch
     AzimuthJoint.forceHomed();
     ClawJoint.forceHomed();
   }
      
-  public double[] getArmAngles() {
+  public static double[] getArmAngles() {
     double[] l_currentPos = {azimuthAngle,ShoulderAngle,elbowAngle};
     return l_currentPos;
   }
-  public double[] getArmPositionThetaRZ() {
+  public static double[] getArmPositionThetaRZ() {
     // Calculations done in Radians for 2 segment arm of equal segment lengths
     //Length from shoulder to claw
     double l_Hypotenus = 2 * ArmConstants.ARM_LENGTH1 * Math.sin(elbowAngle / 2 * Math.PI / 180);
@@ -80,7 +99,7 @@ public class ArmSubsystem extends SubsystemBase {
     double[] l_currentPos = {azimuthAngle,l_radius,l_height};
     return l_currentPos;
   }
-  public double[] getArmPositionXYZ() {
+  public static double[] getArmPositionXYZ() {
     // Calculations done in Radians for 2 segment arm of equal segment lengths
     //Length from shoulder to claw
     double l_x,l_y,l_z;
@@ -100,7 +119,7 @@ public class ArmSubsystem extends SubsystemBase {
     double[] l_currentPos = {l_x,l_y,l_z};
     return l_currentPos;
   }
-  public boolean shoulderAndElbowHomedCondition() {
+  public static boolean shoulderAndElbowHomedCondition() {
     // Query some boolean state, such as a digital sensor.
     return (ShoulderJoint.homedCondition()&&ElbowJoint.homedCondition());
   }
@@ -142,7 +161,7 @@ public class ArmSubsystem extends SubsystemBase {
     System.out.println(l_azimuth);
   }
 
-  private void RunJointsToSetAngles(){
+  private static void RunJointsToSetAngles(){
     AzimuthJoint.RunJointToAngle(azimuthAngle);
     ShoulderJoint.RunJointToAngle(ShoulderAngle);
     if(ShoulderAngle>82){
@@ -152,7 +171,7 @@ public class ArmSubsystem extends SubsystemBase {
     ClawJoint.RunJointToAngle(clawPosition);
   }
 //The next two are protected classes used for the separate advanced commands within the subsystem
-  protected void RunJointsToThetaRZ(double l_theta, double l_r, double l_z){//protected to keep control within commands
+  protected static void RunJointsToThetaRZ(double l_theta, double l_r, double l_z){//protected to keep control within commands
     double [] l_angles = convertThetaRZtoAngles(l_theta, l_r, l_z);
     //set those angles to the class variables
     
@@ -219,7 +238,7 @@ public class ArmSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
   
-  public void forInitUseOnlyHold(){
+  public static void forInitUseOnlyHold(){
     azimuthAngle=AzimuthJoint.getTrueJointAngle();
     System.out.println("azimuth angle" + azimuthAngle);
     //if (shoulderAndElbowHomedCondition()){
@@ -228,7 +247,7 @@ public class ArmSubsystem extends SubsystemBase {
       elbowAngle= ElbowJoint.getTrueJointAngle();
       System.out.println("elbow angle" + elbowAngle);
     //}
-    new PrintCommand("XYZ",this).schedule();
+    new PrintCommand("XYZ").schedule();
     
   }
 
